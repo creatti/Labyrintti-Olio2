@@ -6,14 +6,17 @@
 #include <iterator>
 #include <cmath>
 #include <ctime>
+#include <exception>
 #include "pelirajapinta.hh"
 #include "koordinaatti.hh"
 #include "toimintovirhe.hh"
 #include "komentovirhe.hh"
+#include "alustusvirhe.hh"
 #include "valmiiden_toteutus\include\naytto.hh"
 
 #include "Player.h"
 #include "Piece.h"
+#include "PlayerActionStatus.h"
 
 class Game :
 	public Julkinen::Pelirajapinta
@@ -37,24 +40,25 @@ public:
 	bool vaihdaVuoro();
 	Julkinen::PelaajaTyyppi haeVuorossa();
 
-	
+
 
 private:
-	bool mInitialization;
+	bool mGameMode;
 	Naytto* mScreen;
-	unsigned mAreaSize;
+	int mAreaSize;
 	std::vector<Player> mPlayers;
 	std::vector<Piece> mPieces;
 	int mActivePlayer;
-	bool mHasPushed;
+	PlayerActionStatus mPlayerActionStatus;
+
 
 	// New methods
 	void updateScreen();
-	bool isCollision(Julkinen::Suunta direction, unsigned int amount);
-	bool playerToPlayerCollision(int x, int y);
+	bool isCollision(const Julkinen::Suunta& direction, const unsigned& amount);
+	bool playerToPlayerCollision(const int& x, const int& y);
 	void handleCPU();
-	std::string directionChar(Julkinen::Suunta direction);
-	void movePlayer(int distance, Julkinen::Suunta direction);
+	std::string directionChar(const Julkinen::Suunta& direction);
+	void movePlayer(const int& distance, const Julkinen::Suunta& direction);
 	Julkinen::Suunta randomDirection();
+	bool freePieceSlot(const Julkinen::Koordinaatti& coord);
 };
-
