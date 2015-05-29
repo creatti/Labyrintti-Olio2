@@ -1,71 +1,65 @@
 #include "Piece.h"
 
-
 Piece::Piece(Julkinen::Koordinaatti coord, Julkinen::PalaTyyppi type, unsigned int rotation) :
-mLocation(coord), mType(type), mRotation(rotation), 
-mSpecialType(Julkinen::ErikoispalaTyyppi()), mTarget(Julkinen::Koordinaatti()), mItem('x')
-{
-}
+Location(coord), Type(type), Rotation(rotation), 
+SpecialType(Julkinen::ErikoispalaTyyppi()), Target(Julkinen::Koordinaatti()), Item('x')
+{}
 Piece::Piece(const Piece &org) :
-mLocation(org.mLocation), mType(org.mType), mRotation(org.mRotation), 
-mSpecialType(org.mSpecialType), mTarget(org.mTarget), mItem(org.mItem)
-{
-}
+Location(org.Location), Type(org.Type), Rotation(org.Rotation), 
+SpecialType(org.SpecialType), Target(org.Target), Item(org.Item)
+{}
 Piece::~Piece()
-{
-}
-
+{}
 Piece& Piece::operator=(const Piece &source)
 {
 	if (this != &source)
 	{
-		mLocation = source.mLocation;
-		mType = source.mType;
-		mRotation = source.mRotation;
-		mSpecialType = source.mSpecialType;
-		mTarget = source.mTarget;
-		mItem = source.mItem;
+		Location = source.Location;
+		Type = source.Type;
+		Rotation = source.Rotation;
+		SpecialType = source.SpecialType;
+		Target = source.Target;
+		Item = source.Item;
 	}
 	return *this;
 }
 
 Julkinen::Koordinaatti Piece::getLocation() const{
-	return mLocation;
+	return Location;
 }
 Julkinen::PalaTyyppi Piece::getType() const{
-	return mType;
+	return Type;
 }
 unsigned int Piece::getRotation() const{
-	return mRotation;
+	return Rotation;
 }
 Julkinen::ErikoispalaTyyppi Piece::getSpecialType() const{
-	return mSpecialType;
+	return SpecialType;
 }
 Julkinen::Koordinaatti Piece::getTarget() const{
-	return mTarget;
+	return Target;
 }
 char Piece::getItem() const{
-	return mItem;
+	return Item;
 }
-
 void Piece::setType(Julkinen::PalaTyyppi type){
-	mType = type;
+	Type = type;
 }
 void Piece::setRotation(unsigned int rotation){
-	mRotation = rotation;
+	Rotation = rotation;
 }
 void Piece::setLocation(Julkinen::Koordinaatti coord){
-	mLocation = coord;
+	Location = coord;
 }
 void Piece::setSpecialType(Julkinen::ErikoispalaTyyppi specialType){
-	mSpecialType = specialType;
+	SpecialType = specialType;
 }
 void Piece::setTarget(Julkinen::Koordinaatti coord){
-	mTarget = coord;
+	Target = coord;
 }
 void Piece::setItem(char item){
-	mItem = item;
+	Item = item;
 }
 void Piece::removeItem(){
-	mItem = 'x';
+	Item = 'x';
 }

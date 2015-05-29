@@ -13,7 +13,6 @@
 #include "komentovirhe.hh"
 #include "alustusvirhe.hh"
 #include "valmiiden_toteutus\include\naytto.hh"
-
 #include "Player.h"
 #include "Piece.h"
 #include "PlayerActionStatus.h"
@@ -24,8 +23,6 @@ class Game :
 public:
 	Game();
 	~Game();
-
-	// Inherited methods
 	bool onkoAlustustilassa() const;
 	void lisaaNaytto(Julkinen::Nayttorajapinta* naytto);
 	void maaritaPelialueenKoko(Julkinen::Koordinaatti const& koko);
@@ -40,8 +37,6 @@ public:
 	bool vaihdaVuoro();
 	Julkinen::PelaajaTyyppi haeVuorossa();
 
-
-
 private:
 	bool mGameMode;
 	Naytto* mScreen;
@@ -50,9 +45,6 @@ private:
 	std::vector<Piece> mPieces;
 	int mActivePlayer;
 	PlayerActionStatus mPlayerActionStatus;
-
-
-	// New methods
 	void updateScreen();
 	bool isCollision(const Julkinen::Suunta& direction, const unsigned& amount);
 	bool playerToPlayerCollision(const int& x, const int& y);

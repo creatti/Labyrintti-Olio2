@@ -5,8 +5,6 @@
 Game::Game() :
 mGameMode(false), mScreen(nullptr), mAreaSize(0), mActivePlayer(0)
 {}
-
-
 Game::~Game()
 {
 	DEBUG_OUTPUT("Game destructor" << std::endl);
@@ -80,7 +78,6 @@ void Game::lisaaPala(Julkinen::PalaTyyppi pala, unsigned int rotaatio, Julkinen:
 		std::cout << std::endl;
 	}
 
-
 	// Add the piece
 	mPieces.push_back(Piece(sijainti, pala, rotaatio));
 }
@@ -105,7 +102,6 @@ void Game::lisaaEsine(char merkki, Julkinen::Koordinaatti const& sijainti, std::
 		av.tulosta(std::cout);
 		std::cout << std::endl;
 	}
-
 
 	// Find piece where this item belongs and add it
 	for (int i = 0; i < (int)mPieces.size(); i++){
@@ -141,7 +137,6 @@ void Game::asetaPalanTyyppi(Julkinen::ErikoispalaTyyppi tyyppi, Julkinen::Koordi
 		av.tulosta(std::cout);
 		std::cout << std::endl;
 	}
-
 
 	std::vector<Piece>::iterator currentPiece = std::find_if(mPieces.begin(), mPieces.end(), [&](Piece piece){
 		return piece.getLocation() == sijainti;
@@ -188,8 +183,6 @@ void Game::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		kv.tulosta(std::cout);
 		return;
 	}
-
-
 
 	// Begin construction mode
 	mScreen->komentoAloitaRakennus();
@@ -347,7 +340,7 @@ void Game::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara){
 
 	if (suunta == Julkinen::AUTOMAATTI){
 		handleCPU();
-		// CPU actions handled, no reason to continue in method
+		// CPU actions handled
 		return;
 	}
 
@@ -383,11 +376,8 @@ void Game::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara){
 	if (suunta == Julkinen::PAIKALLAAN){
 		mPlayers.at(mActivePlayer).setLastCommand(std::string("paikallaan"));
 		mPlayerActionStatus.setMoved();
-		// Player does not want to move, no reason to continue in method
 		return;
 	}
-
-	// If got to this point, it is safe to move player.
 	movePlayer(maara, suunta);
 	mPlayers.at(mActivePlayer).setLastCommand(std::string("liiku " + directionChar(suunta) + " " + std::to_string(maara)));
 	mPlayerActionStatus.setMoved();
@@ -411,7 +401,6 @@ bool Game::vaihdaVuoro(){
 		return true;
 	}
 
-
 	// Check if someone won game
 	for (int i = 0; i < (int)mPlayers.size(); i++){
 		if (mPlayers.at(i).isWinner())
@@ -421,8 +410,6 @@ bool Game::vaihdaVuoro(){
 			return false;
 		}
 	};
-
-	// Do things
 	mScreen->komentoAloitaRakennus();
 	mGameMode = false;
 
@@ -567,7 +554,6 @@ bool Game::isCollision(const Julkinen::Suunta& direction, const unsigned& amount
 			std::vector<Piece>::iterator currentPiece = std::find_if(mPieces.begin(), mPieces.end(), [&](Piece piece){
 				return piece.getLocation() == Julkinen::Koordinaatti(x, y);
 			});
-
 			Julkinen::PalaTyyppi startType = currentPiece->getType();
 			unsigned int startRotation = currentPiece->getRotation();
 
@@ -714,7 +700,6 @@ void Game::handleCPU(){
 			safeToMove = true;
 			break;
 		}
-
 	}
 	// If could not move, try move to random direction as far as possible
 	if (!safeToMove){
@@ -736,7 +721,6 @@ void Game::handleCPU(){
 				safeToMove = true;
 				break;
 			}
-
 		}
 	}
 	// Confirm that it is safe and move CPU.

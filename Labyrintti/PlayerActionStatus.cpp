@@ -3,28 +3,34 @@
 PlayerActionStatus::PlayerActionStatus() :
 mPlayerMoved(false), mPlayerPushed(false)
 {}
-PlayerActionStatus::~PlayerActionStatus(){
-}
-
-bool PlayerActionStatus::isMoved(){
+PlayerActionStatus::~PlayerActionStatus()
+{}
+bool PlayerActionStatus::isMoved()
+{
 	return mPlayerMoved;
 }
-bool PlayerActionStatus::isPushed(){
+bool PlayerActionStatus::isPushed()
+{
 	return mPlayerPushed;
 }
-void PlayerActionStatus::setMoved(){
+void PlayerActionStatus::setMoved()
+{
 	mPlayerMoved = true;
 }
-void PlayerActionStatus::setPushed(){
+void PlayerActionStatus::setPushed()
+{
 	mPlayerPushed = true;
 }
-bool PlayerActionStatus::actionsDone(){
+bool PlayerActionStatus::actionsDone()
+{
 	if (mPlayerMoved && mPlayerPushed)
+	{
 		return true;
-
+	}
 	return false;
 }
-void PlayerActionStatus::reset(){
+void PlayerActionStatus::reset()
+{
 	mPlayerMoved = false;
 	mPlayerPushed = false;
 }
